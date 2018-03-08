@@ -29,12 +29,9 @@ const Engine = (function(global) {
 
     let lastTime;
 
-
     canvas.width = 505;
     canvas.height = 606;
     doc.querySelector('.game__container').appendChild(canvas);
-
-
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -54,7 +51,6 @@ const Engine = (function(global) {
          */
         update(dt);
         render();
-
 
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
@@ -90,7 +86,6 @@ const Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
     }
 
     /* This is called by the update function and loops through all of the
@@ -173,16 +168,11 @@ const Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
-        // console.log('reset clicked');
-
-        // console.log(startBtn, resetBtn);
         resetBtn.addEventListener('click', () => {
             counter = 0;
             livesCounter = 0;
             player.resetPosition();
             gem = new Gem();
-            // gem.gemPos();
         });
     }
 
@@ -224,5 +214,3 @@ const Engine = (function(global) {
     global.ctx = ctx;
 
 })(this);
-
-// module.exports = Engine;

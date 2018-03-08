@@ -1,6 +1,3 @@
-// var Engine = require('engine.js');
-
-
 const Board = function() {
     this.width = 400;
     this.height = 400;
@@ -16,11 +13,6 @@ let livesCounter = 0;
 
 // Enemies our player must avoid
 const Enemy = function() {
-    // Variables applied to each of our instances go here,
-    // we've provided one for you to get started
-
-    // The image/sprite for our enemies, this uses
-    // a helper we've provided to easily load images
     this.sprite = 'images/enemy-bug.png';
     this.x = -cellWidth;
     this.y = cellWidth * Math.round(Math.random() * 2) + cellWidth;
@@ -30,7 +22,7 @@ const Enemy = function() {
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
+    // Multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
 
@@ -59,10 +51,7 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
-// Now write your own player class
-// This class requires an update(), render() and
-// a handleInput() method.
-
+// Player class
 const Player = function() {
     this.sprite = 'images/char-cat-girl.png';
     this.x = board.width/2;
@@ -89,25 +78,21 @@ Player.prototype.handleInput = function(key) {
             if (this.x > 0) {
                 this.x -= 100;
             }
-            // console.log(this.x);
             break;
         case 'up':
             if (this.y > 0) {
                 this.y -= cellWidth;
             }
-            // console.log(this.y);
             break;
         case 'right':
             if (this.x < board.width) {
                 this.x += 100;
             }
-            // console.log(this.x);
             break;
         case 'down':
             if (this.y < board.width) {
                 this.y += cellWidth;
             }
-            // console.log(this.y);
             break;
     }
 };
@@ -123,15 +108,6 @@ const Gem = function() {
     this.sprites = ['images/Gem Orange.png', 'images/Gem Green.png', 'images/Gem Blue.png'];
     this.index = Math.round(Math.random() * 2);
 }
-
-// Gem.prototype.gemPos = function() {
-//     let num = Math.floor(Math.random() * 401);
-//     if (num % 100 === 0) {
-//         this.x = num;
-//     } else {
-//         this.gemPos();
-//     }
-// };
 
 Gem.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprites[this.index]), this.x, this.y);
@@ -149,22 +125,14 @@ Gem.prototype.collect = function() {
     }
 };
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
-
 const allEnemies = [new Enemy(), new Enemy()];
 
 const player = new Player();
 
 let gem = new Gem();
-// console.log(gem);
 
-// gem.gemPos();
-
-
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// Listen for key presses and sends the keys to
+// Player.handleInput() method.
 document.addEventListener('keydown', (e) => {
     const allowedKeys = {
         37: 'left',
@@ -174,7 +142,4 @@ document.addEventListener('keydown', (e) => {
     };
 
     player.handleInput(allowedKeys[e.keyCode]);
-    // console.log(player);
-
-
 });
